@@ -45,6 +45,7 @@ class Pages extends Component {
           return (
             <div>
                 <h4>Responsive Pages</h4>
+                <button className="btn btn-light"><Link to="/newpage">(+) Create New Page</Link></button>
                 <table class="table">
                     <thead>
                         <tr>
@@ -66,8 +67,10 @@ class Pages extends Component {
                             <td>{page.type}</td>
                             <td>{page.isActive}</td>
                             <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
-                            <td><button type="button" className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> <button type="button" className="btn btn-danger"><FaTrashAlt /> Delete</button></td>
-                            
+                            <td>
+                              <button className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> 
+                              <button type="button" className="btn btn-danger"><FaTrashAlt /> Delete</button>
+                            </td>
                         </tr>
                         ))}
                     {/* {this.state.pages.map(page => (
