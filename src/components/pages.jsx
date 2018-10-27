@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 class Pages extends Component {
     constructor(props) {
@@ -65,7 +66,7 @@ class Pages extends Component {
                             <td>{page.type}</td>
                             <td>{page.isActive}</td>
                             <td>{page.publishedOn}</td>
-                            <td><Link to={`/editpage/${page.id}`}>EDIT</Link> | DELETE</td>
+                            <td><button type="button" className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> <button type="button" className="btn btn-danger"><FaTrashAlt /> Delete</button></td>
                             
                         </tr>
                         ))}

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 class EditPage extends Component {
     state = {  }
     render() {
         return ( 
             <div>
-                Edit Page #{this.props.match.params.id}
+                <FaEdit /> Edit Page #{this.props.match.params.id}
             </div> );
     }
 }
