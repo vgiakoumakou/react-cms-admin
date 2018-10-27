@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PageForm from './common/pageform';
-import { FaEdit } from 'react-icons/fa';
+import { FaExternalLinkAlt } from 'react-icons/fa';
 
 class NewPage extends PageForm {
     state = {
-        data: { title: "", description: ""},
+        data: { title: "", description: "", type: 0, isActive: false, publishedOn: new Date().toISOString() },
         errors: {}
     };
 
-    doSubmit = () => {
-        // Call the server
-        console.log("Submitted!");
+    doSubmit = async () => {
+        const obj = this.state.data;
+        const { data } = await axios.post('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/', obj);
+        console.log(data);
     }
 
     render() {
@@ -18,7 +20,7 @@ class NewPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaEdit /> New Page #{this.props.match.params.id}</h4>
+                <h4><FaExternalLinkAlt /> New Page #{this.props.match.params.id}</h4>
                 {this.renderPageForm()}
             </div> );
     }

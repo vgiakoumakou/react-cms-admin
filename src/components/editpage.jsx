@@ -1,16 +1,30 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import PageForm from './common/pageform';
 import { FaEdit } from 'react-icons/fa';
 
 class EditPage extends PageForm {
     state = {
-        data: { title: "PageAA", description: "DescrAA"},
+        data: {},
         errors: {}
     };
 
-    doSubmit = () => {
-        // Call the server
-        console.log("Submitted!");
+    async componentDidMount() {
+        // pending > resolved (success) OR rejected (failure)
+        // we await the result of the call and get the actual response object
+        const { data } = await axios.get('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/', {
+            params: {
+              id: `${this.props.match.params.id}`
+            }
+        });
+        this.setState({ data });
+        console.log(data);
+    }
+
+    doSubmit = async () => {
+        const obj = this.state.data;
+        const { data } = await axios.put('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/'+ this.props.match.params.id, obj);
+        console.log(data);
     }
 
     render() {

@@ -11,7 +11,10 @@ class PageForm extends Component {
     // Our schema for joi validation
     schema = {
         title: Joi.string().min(0).max(50).required().label('Title'),
-        description: Joi.string().min(0).max(200).required().label('Description')
+        description: Joi.string().min(0).max(200).required().label('Description'),
+        type: Joi.number().required().label('Page type'),
+        isActive: Joi.label('Page activation'),
+        publishedOn: Joi.string().label('Publication date')
     };
 
     // Validate form
@@ -108,11 +111,11 @@ class PageForm extends Component {
                                 name="title" 
                                 id="title"
                                 className="form-control" 
-                                minlength="0" 
-                                maxlength="50" 
                                 autoFocus />
                         </div>
                         {this.state.errors.title && <div className="alert alert-danger">{this.state.errors.title}</div>}
+                    </div>
+                    <div className="form-group">
                         <label htmlFor="description">Page Description *</label>
                         <div className="input-group">
                             <span className="input-group-addon"><FaEdit /></span>
@@ -123,12 +126,44 @@ class PageForm extends Component {
                                 name="description"
                                 id="description" 
                                 className="form-control" 
-                                minlength="0" 
-                                maxlength="200"
                                 rows="2">
                             </textarea>
                         </div>
                         {this.state.errors.description && <div className="alert alert-danger">{this.state.errors.description}</div>}
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="type">Page type *</label>
+                        <select value={this.state.data.type} onChange={this.handleChange} id="type" name="type" className="form-control">
+                            <option value="0">Menu</option>
+                            <option value="1">Events</option>
+                            <option value="2">Content</option>
+                        </select>
+                    </div>
+                    <div className="form-check">
+                        <input 
+                            type="checkbox" 
+                            checked={this.state.data.isActive}
+                            onChange={this.handleChange} 
+                            className="form-check-input" 
+                            id="isActive"
+                            name="isActive" />
+                        <label className="form-check-label" htmlFor="isActive">This page will be <b>active</b>.</label>
+                    </div>
+                    <div className="form-group">
+                        <label htmlFor="publishedOn">Published on *</label>
+                        <div className="input-group">
+                            <span className="input-group-addon"><FaEdit /></span>
+                            <input 
+                                type="text"
+                                value={this.state.data.publishedOn} 
+                                onChange={this.handleChange} 
+                                name="publishedOn"
+                                id="publishedOn" 
+                                className="form-control"
+                                readOnly/>
+                        </div>
+                    </div>
+                    <div className="form-group">
                         {this.renderSubmitButton("Save Changes")}
                         {this.renderCancelButton()}
                     </div>
