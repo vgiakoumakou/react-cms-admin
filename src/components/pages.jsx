@@ -65,7 +65,7 @@ class Pages extends Component {
                             <td>{page.description}</td>
                             <td>{page.type}</td>
                             <td>{page.isActive}</td>
-                            <td>{page.publishedOn}</td>
+                            <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
                             <td><button type="button" className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> <button type="button" className="btn btn-danger"><FaTrashAlt /> Delete</button></td>
                             
                         </tr>
