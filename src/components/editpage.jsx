@@ -24,7 +24,7 @@ class EditPage extends PageForm {
     doSubmit = async () => {
         const obj = this.state.data;
         const { data } = await axios.put('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/'+ this.props.match.params.id, obj);
-        console.log(data);
+        console.log(obj);
     }
 
     render() {
@@ -33,7 +33,10 @@ class EditPage extends PageForm {
         return ( 
             <div>
                 <h4><FaEdit /> Edit Page #{this.props.match.params.id}</h4>
-                {this.renderPageForm()}
+                <form onSubmit={this.handleSubmit}>
+                    <input type="number" id="id" name="id" className="form-control" value={this.state.data.id} onChange={this.handleChange} readOnly />
+                    {this.renderPageForm()}
+                </form>
             </div> );
     }
 }

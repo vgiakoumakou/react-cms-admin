@@ -10,6 +10,7 @@ class NewPage extends PageForm {
     };
 
     doSubmit = async () => {
+        console.log('prin '+ this.state.data );
         const obj = this.state.data;
         const { data } = await axios.post('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/', obj);
         console.log(data);
@@ -21,7 +22,9 @@ class NewPage extends PageForm {
         return ( 
             <div>
                 <h4><FaExternalLinkAlt /> New Page #{this.props.match.params.id}</h4>
-                {this.renderPageForm()}
+                <form onSubmit={this.handleSubmit}>
+                    {this.renderPageForm()}
+                </form>
             </div> );
     }
 }

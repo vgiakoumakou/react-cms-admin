@@ -10,6 +10,7 @@ class PageForm extends Component {
 
     // Our schema for joi validation
     schema = {
+        id: Joi.number().label('Id'),
         title: Joi.string().min(0).max(50).required().label('Title'),
         description: Joi.string().min(0).max(200).required().label('Description'),
         type: Joi.number().required().label('Page type'),
@@ -98,76 +99,74 @@ class PageForm extends Component {
     renderPageForm() {
         return ( 
             <div>
-                <form onSubmit={this.handleSubmit}>
-                    <div className="form-group">
-                        <hr />
-                        <label htmlFor="title">Page Title *</label>
-                        <div className="input-group">
-                            <span className="input-group-addon"></span>
-                            <input 
-                                type="text" 
-                                value={this.state.data.title} 
-                                onChange={this.handleChange} 
-                                name="title" 
-                                id="title"
-                                className="form-control" 
-                                autoFocus />
-                        </div>
-                        {this.state.errors.title && <div className="alert alert-danger">{this.state.errors.title}</div>}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="description">Page Description *</label>
-                        <div className="input-group">
-                            <span className="input-group-addon"><FaEdit /></span>
-                            <textarea 
-                                type="text"
-                                value={this.state.data.description} 
-                                onChange={this.handleChange} 
-                                name="description"
-                                id="description" 
-                                className="form-control" 
-                                rows="2">
-                            </textarea>
-                        </div>
-                        {this.state.errors.description && <div className="alert alert-danger">{this.state.errors.description}</div>}
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="type">Page type *</label>
-                        <select value={this.state.data.type} onChange={this.handleChange} id="type" name="type" className="form-control">
-                            <option value="0">Menu</option>
-                            <option value="1">Events</option>
-                            <option value="2">Content</option>
-                        </select>
-                    </div>
-                    <div className="form-check">
+                <div className="form-group">
+                    <hr />
+                    <label htmlFor="title">Page Title *</label>
+                    <div className="input-group">
+                        <span className="input-group-addon"></span>
                         <input 
-                            type="checkbox" 
-                            checked={this.state.data.isActive}
+                            type="text" 
+                            value={this.state.data.title} 
                             onChange={this.handleChange} 
-                            className="form-check-input" 
-                            id="isActive"
-                            name="isActive" />
-                        <label className="form-check-label" htmlFor="isActive">This page will be <b>active</b>.</label>
+                            name="title" 
+                            id="title"
+                            className="form-control" 
+                            autoFocus />
                     </div>
-                    <div className="form-group">
-                        <label htmlFor="publishedOn">Published on *</label>
-                        <div className="input-group">
-                            <span className="input-group-addon"><FaEdit /></span>
-                            <input 
-                                type="text"
-                                value={this.state.data.publishedOn} 
-                                onChange={this.handleChange} 
-                                name="publishedOn"
-                                id="publishedOn" 
-                                className="form-control"
-                                readOnly/>
-                        </div>
+                    {this.state.errors.title && <div className="alert alert-danger">{this.state.errors.title}</div>}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="description">Page Description *</label>
+                    <div className="input-group">
+                        <span className="input-group-addon"><FaEdit /></span>
+                        <textarea 
+                            type="text"
+                            value={this.state.data.description} 
+                            onChange={this.handleChange} 
+                            name="description"
+                            id="description" 
+                            className="form-control" 
+                            rows="2">
+                        </textarea>
                     </div>
-                    <div className="form-group">
-                        {this.renderSubmitButton("Save Changes")}
-                        {this.renderCancelButton()}
+                    {this.state.errors.description && <div className="alert alert-danger">{this.state.errors.description}</div>}
+                </div>
+                <div className="form-group">
+                    <label htmlFor="type">Page type *</label>
+                    <select value={this.state.data.type} onChange={this.handleChange} id="type" name="type" className="form-control">
+                        <option value="0">Menu</option>
+                        <option value="1">Events</option>
+                        <option value="2">Content</option>
+                    </select>
+                </div>
+                <div className="form-check">
+                    <input 
+                        type="checkbox" 
+                        checked={this.state.data.isActive}
+                        onChange={this.handleChange} 
+                        className="form-check-input" 
+                        id="isActive"
+                        name="isActive" />
+                    <label className="form-check-label" htmlFor="isActive">This page will be <b>active</b>.</label>
+                </div>
+                <div className="form-group">
+                    <label htmlFor="publishedOn">Published on *</label>
+                    <div className="input-group">
+                        <span className="input-group-addon"><FaEdit /></span>
+                        <input 
+                            type="text"
+                            value={this.state.data.publishedOn} 
+                            onChange={this.handleChange} 
+                            name="publishedOn"
+                            id="publishedOn" 
+                            className="form-control"
+                            readOnly/>
                     </div>
-                </form>
+                </div>
+                <div className="form-group">
+                    {this.renderSubmitButton("Save Changes")}
+                    {this.renderCancelButton()}
+                </div>
             </div>
         );
     }
