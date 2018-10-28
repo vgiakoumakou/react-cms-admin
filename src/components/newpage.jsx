@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PageForm from './common/pageform';
-import { FaExternalLinkAlt } from 'react-icons/fa';
+import { FaPlusCircle } from 'react-icons/fa';
 
 class NewPage extends PageForm {
     state = {
-        data: { title: "", description: "", type: "", isActive: true, publishedOn: new Date().toISOString() },
+        data: { title: "", description: "", type: "0", isActive: true, publishedOn: new Date().toISOString() },
         errors: {}
     };
 
@@ -24,7 +24,7 @@ class NewPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaExternalLinkAlt /> New Page {this.state.data.title}</h4>
+                <h4><FaPlusCircle /> New Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
                 <form>
                     {this.renderPageForm()}
                 </form>

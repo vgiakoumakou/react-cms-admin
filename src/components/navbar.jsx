@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import { FaHome, FaDesktop, FaMobileAlt, FaShareAlt } from 'react-icons/fa';
+import { FaHome, FaDesktop, FaMobileAlt, FaShareAlt, FaUser, FaCaretDown, FaSignOutAlt } from 'react-icons/fa';
  
 const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary mainNavbar">
         <Link className="navbar-brand" to="#"><img src="/ordereze_logo.jpeg"/> Admin Panel</Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
         </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse">
             <ul className="navbar-nav mr-auto">
                 <li className="nav-item">
                     <Link className="nav-link" to="/"><FaHome /> Home</Link>
@@ -22,6 +22,14 @@ const NavBar = () => {
                 </li>
                 <li>
                     <Link className="nav-link" to="/"><FaShareAlt /> Social Hub</Link>
+                </li>
+            </ul>
+            <ul className="navbar-nav navbar-dark">
+                <li className="nav-item userLoggedIn">
+                    <Link className="nav-link" to="/"><FaUser /> Maria Papadopoulou <FaCaretDown /></Link>
+                </li>
+                <li className="nav-item userLogOut">
+                    <Link className="nav-link" to="/"><FaSignOutAlt /> Sign Out</Link>
                 </li>
             </ul>
         </div>

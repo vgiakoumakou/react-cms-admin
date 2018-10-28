@@ -33,7 +33,8 @@ class DeletePage extends Component {
         return ( 
             <div>
                 <h4><FaTrashAlt /> Delete Page #{this.props.match.params.id}</h4>
-                <p>Are you sure you want to delete permanently the Page "<b>{this.state.data.title}</b>"?</p>
+                <hr />
+                <p>Are you sure you want to <b>permanently delete</b> the Page named <b>"{this.state.data.title}"</b>?</p>
                 <button className="btn btn-danger" onClick={this.doSubmit}><FaTrashAlt /> Yes, delete it.</button>
                 <button className="btn btn-secondary" onClick={() => {this.props.history.push(`/editpage/${this.props.match.params.id}`)}}><FaUndo /> Cancel</button>
 

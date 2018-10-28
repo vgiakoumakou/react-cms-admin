@@ -1,0 +1,52 @@
+/* This file applies custom styling to 
+   the app's elements */
+
+#root {
+    background-color: #f2f2f261;
+}
+
+/* Main nav-bar styling */
+.mainNavbar {
+    box-shadow: 1px 1px 2px 2px grey;
+}
+.mainNavbar .active {
+    font-weight: 500;
+}
+
+.content {
+    margin-top: 3%;
+    padding: 3%;
+    box-shadow: 1px 1px 1px 2px lightgrey;
+    border-radius: 2%;
+    background-color: white;
+}
+
+.content button {
+    margin-right: 10px;
+    margin-bottom: 15px;
+    box-shadow: 1px 1px 1px 1px lightgrey;
+}
+.createPageBtn a {
+    text-decoration: none;
+    color: white;
+}
+
+.pagesTable td {
+    max-width: 250px;
+}
+
+.content button:hover > a {
+    text-decoration: none;
+    color: white;
+}
+
+.pageForm .input-group-text {
+    display: inline-block;
+}
+
+.content .deleteBtn {
+    float: right;
+}
+
+
+    

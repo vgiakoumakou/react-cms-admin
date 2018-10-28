@@ -39,10 +39,10 @@ class EditPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaEdit /> Edit Page #{this.props.match.params.id}</h4>
+                <h4><FaEdit /> Edit Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
                 <hr />
-                <button type="button" className="btn btn-danger" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
-                <form>
+                <button type="button" className="btn btn-danger deleteBtn" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
+                <form className="pageForm">
                     <input type="number" id="id" name="id" className="form-control" value={this.state.data.id} onChange={this.handleChange} readOnly />
                     {this.renderPageForm()}
                 </form>

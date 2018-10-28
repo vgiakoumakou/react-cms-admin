@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { FaEdit, FaUndo, FaPaperPlane } from 'react-icons/fa';
+import { FaEdit, FaUndo, FaPaperPlane, FaFolderPlus } from 'react-icons/fa';
 
 class PageForm extends Component {
     state = { 
@@ -124,7 +124,7 @@ class PageForm extends Component {
                     <label htmlFor="title">Page Title *</label>
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text"><FaEdit /></span>
+                            <span className="input-group-text"><FaFolderPlus /></span>
                         </div>
                         <input 
                             type="text" 
