@@ -14,6 +14,16 @@ class Pages extends Component {
         // we await the result of the call and get the actual response object
         const { data: pages } = await axios.get('http://pagesmanagement.azurewebsites.net/api/ResponsivePages')
         this.setState({ pages });
+        console.log(pages);
+      }
+
+      getPageType(pageType) {
+        if (pageType === 0)
+          return "Menu"
+        else if (pageType === 1)
+          return "Events"
+        else
+          return "Content"
       }
     
       render() {
@@ -28,8 +38,8 @@ class Pages extends Component {
                       <th scope="col">Title</th>
                       <th scope="col">Description</th>  
                       <th scope="col">Type</th>
-                      <th scope="col">isActive</th>
-                      <th scope="col">Published On</th>
+                      <th scope="col">Active</th>
+                      <th scope="col">Date of Publish</th>
                       <th scope="col"></th>
                   </tr>
               </thead>
@@ -39,8 +49,8 @@ class Pages extends Component {
                       <th scope="row">{page.id}</th>
                       <td>{page.title}</td>
                       <td>{page.description}</td>
-                      <td>{page.type}</td>
-                      <td>{page.isActive}</td>
+                      <td>{this.getPageType(page.type)}</td>
+                      <td>{page.isActive? "Yes" : "No"}</td>
                       <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
                       <td>
                         <button className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> 

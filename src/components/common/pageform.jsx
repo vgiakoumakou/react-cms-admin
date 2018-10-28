@@ -55,26 +55,44 @@ class PageForm extends Component {
 
     };
 
-    // Handle the change of a field of the form
-    handleChange = ({ currentTarget: input })  => {
+    // Handle the errors
+    handleErrors = (input)  => {
         const errors = {...this.state.errors};
         const errorMessage = this.validateProperty(input);
-        if (errorMessage) {
+        if (errorMessage)
             errors[input.name] = errorMessage;
-        }
-        else {
+        else
             delete errors[input.name];
-        }
 
-        // clone state title
+        //update the state
+        this.setState({ errors });
+    }
+
+    // Handle the change of the form's fields
+    handleFieldChange = ({ currentTarget: input })  => {
+        this.handleErrors(input);
+
+        // clone state
         const data = {...this.state.data};
         data[input.name] = input.value;
 
         //update the state
-        this.setState({ data, errors });
+        this.setState({ data });
     };
 
-    // Render button for the form submission
+    // Handle the change of boolean fields of the form
+    handleBooleanChange = ({ currentTarget: input })  => {
+        this.handleErrors(input);
+
+        // clone state
+        const data = {...this.state.data};
+        data[input.name] = data[input.name] = input.value === 'true' ? true: false; 
+
+        //update the state
+        this.setState({ data });
+    }; 
+
+    // Render the form submission button
     renderSubmitButton(label) {
         return (
             <button 
@@ -107,7 +125,7 @@ class PageForm extends Component {
                         <input 
                             type="text" 
                             value={this.state.data.title} 
-                            onChange={this.handleChange} 
+                            onChange={this.handleFieldChange} 
                             name="title" 
                             id="title"
                             className="form-control" 
@@ -122,7 +140,7 @@ class PageForm extends Component {
                         <textarea 
                             type="text"
                             value={this.state.data.description} 
-                            onChange={this.handleChange} 
+                            onChange={this.handleFieldChange} 
                             name="description"
                             id="description" 
                             className="form-control" 
@@ -133,35 +151,52 @@ class PageForm extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="type">Page type *</label>
-                    <select value={this.state.data.type} onChange={this.handleChange} id="type" name="type" className="form-control">
+                    <select value={this.state.data.type} onChange={this.handleFieldChange} id="type" name="type" className="form-control">
+                        <option value=""></option>
                         <option value="0">Menu</option>
                         <option value="1">Events</option>
                         <option value="2">Content</option>
                     </select>
                 </div>
-                <div className="form-check">
-                    <input 
-                        type="checkbox" 
-                        checked={this.state.data.isActive}
-                        onChange={this.handleChange} 
-                        className="form-check-input" 
-                        id="isActive"
-                        name="isActive" />
-                    <label className="form-check-label" htmlFor="isActive">This page will be <b>active</b>.</label>
-                </div>
+                <div className="form-group">
+                    <label htmlFor="isActive">Page is active *</label>                
+                    <div className="form-check">
+                        <input 
+                            type="radio" 
+                            onChange={this.handleBooleanChange}
+                            checked={this.state.data.isActive===true}
+                            value="true" 
+                            className="form-check-input" 
+                            name="isActive"
+                            id="isActiveTrue" />
+                        <label className="form-check-label" htmlFor="isActiveTrue">Yes</label>
+                    </div>
+                    <div className="form-check">
+                        <input 
+                            type="radio" 
+                            onChange={this.handleBooleanChange}
+                            checked={this.state.data.isActive===false}
+                            value="false" 
+                            className="form-check-input" 
+                            name="isActive"
+                            id="isActiveFalse" />
+                        <label className="form-check-label" htmlFor="isActiveFalse">No</label>
+                    </div>   
+                </div>             
                 <div className="form-group">
                     <label htmlFor="publishedOn">Published on *</label>
-                    <div className="input-group">
+                    <div className="input-group" hidden>
                         <span className="input-group-addon"><FaEdit /></span>
                         <input 
                             type="text"
-                            value={this.state.data.publishedOn} 
-                            onChange={this.handleChange} 
+                            value={this.state.data.publishedOn}
+                            onChange={this.handleInputChange} 
                             name="publishedOn"
                             id="publishedOn" 
                             className="form-control"
                             readOnly/>
                     </div>
+                    <p>{new Date(this.state.data.publishedOn).toLocaleDateString()}</p>
                 </div>
                 <div className="form-group">
                     {this.renderSubmitButton("Save Changes")}
