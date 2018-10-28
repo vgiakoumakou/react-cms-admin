@@ -5,7 +5,7 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 class NewPage extends PageForm {
     state = {
-        data: { title: "", description: "", type: 0, isActive: false, publishedOn: new Date().toISOString() },
+        data: { title: "", description: "", type: "", isActive: true, publishedOn: new Date().toISOString() },
         errors: {}
     };
 
@@ -24,8 +24,8 @@ class NewPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaExternalLinkAlt /> New Page #{this.props.match.params.id}</h4>
-                <form onSubmit={this.handleSubmit}>
+                <h4><FaExternalLinkAlt /> New Page {this.state.data.title}</h4>
+                <form>
                     {this.renderPageForm()}
                 </form>
             </div> );

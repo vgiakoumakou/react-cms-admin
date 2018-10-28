@@ -39,7 +39,7 @@ class Pages extends Component {
                       <th scope="col">Description</th>  
                       <th scope="col">Type</th>
                       <th scope="col">Active</th>
-                      <th scope="col">Date of Publish</th>
+                      <th scope="col">Published on</th>
                       <th scope="col"></th>
                   </tr>
               </thead>

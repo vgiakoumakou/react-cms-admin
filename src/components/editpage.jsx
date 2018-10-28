@@ -18,6 +18,9 @@ class EditPage extends PageForm {
               id: `${this.props.match.params.id}`
             }
         });
+
+        data.type = data.type.toString();
+
         this.setState({ data });
         console.log(data);
     }
@@ -37,8 +40,9 @@ class EditPage extends PageForm {
         return ( 
             <div>
                 <h4><FaEdit /> Edit Page #{this.props.match.params.id}</h4>
+                <hr />
                 <button type="button" className="btn btn-danger" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
-                <form onSubmit={this.handleSubmit}>
+                <form>
                     <input type="number" id="id" name="id" className="form-control" value={this.state.data.id} onChange={this.handleChange} readOnly />
                     {this.renderPageForm()}
                 </form>

@@ -13,7 +13,7 @@ class PageForm extends Component {
         id: Joi.number().label('Id'),
         title: Joi.string().min(0).max(50).required().label('Title'),
         description: Joi.string().min(0).max(200).required().label('Description'),
-        type: Joi.number().required().label('Page type'),
+        type: Joi.string().required().label('Page type'),
         isActive: Joi.label('Page activation'),
         publishedOn: Joi.string().label('Publication date')
     };
@@ -86,17 +86,18 @@ class PageForm extends Component {
 
         // clone state
         const data = {...this.state.data};
-        data[input.name] = data[input.name] = input.value === 'true' ? true: false; 
+        data[input.name] = input.value === 'true' ? true: false; 
 
         //update the state
         this.setState({ data });
-    }; 
+    };
+
 
     // Render the form submission button
     renderSubmitButton(label) {
         return (
             <button 
-                type="submit" 
+                onClick={this.handleSubmit}
                 disabled={this.validate()} 
                 className="btn btn-primary">
                     <FaPaperPlane /> Save Changes 
@@ -107,7 +108,8 @@ class PageForm extends Component {
     // Render cancel button
     renderCancelButton() {
         return (
-            <button 
+            <button
+                onClick={() => {this.props.history.push('/pages')}}
                 className="btn btn-secondary">
                     <FaUndo /> Cancel
             </button>
@@ -121,7 +123,9 @@ class PageForm extends Component {
                     <hr />
                     <label htmlFor="title">Page Title *</label>
                     <div className="input-group">
-                        <span className="input-group-addon"></span>
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"><FaEdit /></span>
+                        </div>
                         <input 
                             type="text" 
                             value={this.state.data.title} 
@@ -136,7 +140,9 @@ class PageForm extends Component {
                 <div className="form-group">
                     <label htmlFor="description">Page Description *</label>
                     <div className="input-group">
-                        <span className="input-group-addon"><FaEdit /></span>
+                        <div className="input-group-prepend">
+                            <span className="input-group-text"><FaEdit /></span>
+                        </div>
                         <textarea 
                             type="text"
                             value={this.state.data.description} 
@@ -151,12 +157,13 @@ class PageForm extends Component {
                 </div>
                 <div className="form-group">
                     <label htmlFor="type">Page type *</label>
-                    <select value={this.state.data.type} onChange={this.handleFieldChange} id="type" name="type" className="form-control">
+                    <select value={this.state.data.type} onChange={this.handleFieldChange} id="type" name="type" className="custom-select">
                         <option value=""></option>
                         <option value="0">Menu</option>
                         <option value="1">Events</option>
                         <option value="2">Content</option>
                     </select>
+                    {this.state.errors.type && <div className="alert alert-danger">{this.state.errors.type}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="isActive">Page is active *</label>                
@@ -184,7 +191,7 @@ class PageForm extends Component {
                     </div>   
                 </div>             
                 <div className="form-group">
-                    <label htmlFor="publishedOn">Published on *</label>
+                    <label htmlFor="publishedOn">Date of publish: </label>
                     <div className="input-group" hidden>
                         <span className="input-group-addon"><FaEdit /></span>
                         <input 
