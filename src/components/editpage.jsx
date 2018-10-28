@@ -1,7 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
+//import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PageForm from './common/pageform';
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
 class EditPage extends PageForm {
     state = {
@@ -23,8 +24,11 @@ class EditPage extends PageForm {
 
     doSubmit = async () => {
         const obj = this.state.data;
-        const { data } = await axios.put('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/'+ this.props.match.params.id, obj);
+        const { data } = await axios.put(`http://pagesmanagement.azurewebsites.net/api/ResponsivePages/${this.props.match.params.id}`, obj);
         console.log(obj);
+                
+        //Redirect to pages 
+        this.props.history.push('/pages');
     }
 
     render() {
@@ -33,11 +37,13 @@ class EditPage extends PageForm {
         return ( 
             <div>
                 <h4><FaEdit /> Edit Page #{this.props.match.params.id}</h4>
+                <button type="button" className="btn btn-danger" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
                 <form onSubmit={this.handleSubmit}>
                     <input type="number" id="id" name="id" className="form-control" value={this.state.data.id} onChange={this.handleChange} readOnly />
                     {this.renderPageForm()}
                 </form>
-            </div> );
+            </div> 
+            );
     }
 }
 

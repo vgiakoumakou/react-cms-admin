@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaFolderPlus } from 'react-icons/fa';
 
 class Pages extends Component {
 
@@ -20,7 +20,7 @@ class Pages extends Component {
         return (
           <div>
             <h4>Responsive Pages</h4>
-            <button className="btn btn-light"><Link to="/newpage">(+) Create New Page</Link></button>
+            <button className="btn btn-light"><Link to="/newpage"><FaFolderPlus /> Create New Page</Link></button>
             <table className="table">
               <thead>
                   <tr>
@@ -44,7 +44,7 @@ class Pages extends Component {
                       <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
                       <td>
                         <button className="btn btn-light"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> 
-                        <button type="button" className="btn btn-danger"><FaTrashAlt /> Delete</button>
+                        {/* <button type="button" className="btn btn-danger"><Link to={`/deletepage/${page.id}`}><FaTrashAlt /> Delete Page</Link></button> */}
                       </td>
                   </tr>
                   ))}

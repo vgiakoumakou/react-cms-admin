@@ -14,6 +14,9 @@ class NewPage extends PageForm {
         const obj = this.state.data;
         const { data } = await axios.post('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/', obj);
         console.log(data);
+        
+        //Redirect to pages 
+        this.props.history.push('/pages');
     }
 
     render() {

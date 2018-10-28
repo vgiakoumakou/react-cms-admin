@@ -4,6 +4,7 @@ import NavBar from "./components/navbar";
 import Pages from "./components/pages";
 import NewPage from "./components/newpage";
 import EditPage from "./components/editpage";
+import DeletePage from "./components/deletepage";
 import logo from './logo.svg';
 import './App.css';
 
@@ -19,6 +20,7 @@ class App extends Component {
                 <Route path="/pages" component={Pages} />
                 <Route path="/newpage" component={NewPage} />
                 <Route path="/editpage/:id" component={EditPage} />
+                <Route path="/deletepage/:id" component={DeletePage} />
               </Switch>
             </div>
           </div>
