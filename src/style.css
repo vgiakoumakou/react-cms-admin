@@ -21,6 +21,7 @@
     background-color: white;
 }
 
+
 .content button {
     margin-right: 10px;
     margin-bottom: 15px;
@@ -29,6 +30,11 @@
 .createPageBtn a {
     text-decoration: none;
     color: white;
+}
+
+.searchGroup {
+    max-width: 350px;
+    float: right;
 }
 
 .pagesTable td {
