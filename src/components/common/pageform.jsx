@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { FaEdit, FaUndo, FaPaperPlane, FaFolderPlus } from 'react-icons/fa';
+import { FaEdit, FaUndo, FaPaperPlane, FaFolderPlus, FaRegCalendarAlt } from 'react-icons/fa';
 
 class PageForm extends Component {
     state = { 
@@ -120,7 +120,6 @@ class PageForm extends Component {
         return ( 
             <div>
                 <div className="form-group">
-                    <hr />
                     <label htmlFor="title">Page Title *</label>
                     <div className="input-group">
                         <div className="input-group-prepend">
@@ -132,10 +131,10 @@ class PageForm extends Component {
                             onChange={this.handleFieldChange} 
                             name="title" 
                             id="title"
-                            className="form-control" 
+                            className={this.state.errors.title ? "form-control is-invalid" : "form-control"}
                             autoFocus />
                     </div>
-                    {this.state.errors.title && <div className="alert alert-danger">{this.state.errors.title}</div>}
+                    {this.state.errors.title && <div className="invalid-feedback d-block">{this.state.errors.title}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="description">Page Description *</label>
@@ -149,11 +148,11 @@ class PageForm extends Component {
                             onChange={this.handleFieldChange} 
                             name="description"
                             id="description" 
-                            className="form-control" 
+                            className={this.state.errors.description ? "form-control is-invalid" : "form-control"}
                             rows="2">
                         </textarea>
                     </div>
-                    {this.state.errors.description && <div className="alert alert-danger">{this.state.errors.description}</div>}
+                    {this.state.errors.description && <div className="invalid-feedback d-block">{this.state.errors.description}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="type">Page type *</label>
@@ -163,7 +162,7 @@ class PageForm extends Component {
                         <option value="1">Events</option>
                         <option value="2">Content</option>
                     </select>
-                    {this.state.errors.type && <div className="alert alert-danger">{this.state.errors.type}</div>}
+                    {this.state.errors.type && <div className="invalid-feedback d-block">{this.state.errors.type}</div>}
                 </div>
                 <div className="form-group">
                     <label htmlFor="isActive">Page is active *</label>                
@@ -190,9 +189,9 @@ class PageForm extends Component {
                         <label className="form-check-label" htmlFor="isActiveFalse">No</label>
                     </div>   
                 </div>             
-                <div className="form-group">
+                <div className="form-group d-none">
                     <label htmlFor="publishedOn">Date of publish: </label>
-                    <div className="input-group" hidden>
+                    <div className="input-group">
                         <span className="input-group-addon"><FaEdit /></span>
                         <input 
                             type="text"
@@ -203,9 +202,8 @@ class PageForm extends Component {
                             className="form-control"
                             readOnly/>
                     </div>
-                    <p>{new Date(this.state.data.publishedOn).toLocaleDateString()}</p>
                 </div>
-                <div className="form-group">
+                <div className="form-group formActionButtons">
                     {this.renderSubmitButton("Save Changes")}
                     {this.renderCancelButton()}
                 </div>

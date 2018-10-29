@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "./components/navbar";
 import Pages from "./components/pages";
 import NewPage from "./components/newpage";
@@ -22,6 +22,7 @@ class App extends Component {
               <Route path="/editpage/:id" component={EditPage} />
               <Route path="/deletepage/:id" component={DeletePage} />
             </Switch>
+            <Redirect from="/" to="/pages" />
           </div>
         </main>
       </React.Fragment>

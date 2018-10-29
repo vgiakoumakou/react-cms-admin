@@ -1,8 +1,7 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
 import axios from 'axios';
 import PageForm from './common/pageform';
-import { FaEdit, FaTrashAlt } from 'react-icons/fa';
+import { FaEdit, FaTrashAlt, FaRegCalendarAlt } from 'react-icons/fa';
 
 class EditPage extends PageForm {
     state = {
@@ -22,13 +21,11 @@ class EditPage extends PageForm {
         data.type = data.type.toString();
 
         this.setState({ data });
-        console.log(data);
     }
 
     doSubmit = async () => {
         const obj = this.state.data;
         const { data } = await axios.put(`http://pagesmanagement.azurewebsites.net/api/ResponsivePages/${this.props.match.params.id}`, obj);
-        console.log(obj);
                 
         //Redirect to pages 
         this.props.history.push('/pages');
@@ -39,15 +36,26 @@ class EditPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaEdit /> Edit Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
-                <hr />
-                <button type="button" className="btn btn-danger deleteBtn" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
+                <div className="row">
+                    <div className="col-12">
+                        <h4><FaEdit /> Edit Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
+                        <hr />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-6">
+                        <span><FaRegCalendarAlt /> Published on  {new Date(this.state.data.publishedOn).toLocaleDateString()} </span>
+                    </div>
+                    <div className="col-6">
+                        <button type="button" className="btn btn-danger deleteBtn" onClick={() => {this.props.history.push(`/deletepage/${this.props.match.params.id}`)}}><FaTrashAlt /> Delete this page</button>
+                    </div>
+                </div>
                 <form className="pageForm">
-                    <input type="number" id="id" name="id" className="form-control" value={this.state.data.id} onChange={this.handleChange} readOnly />
+                    <input type="number" id="id" name="id" className="form-control d-none" value={this.state.data.id} onChange={this.handleChange} readOnly />
                     {this.renderPageForm()}
                 </form>
-            </div> 
-            );
+            </div>
+        );
     }
 }
 

@@ -10,10 +10,8 @@ class NewPage extends PageForm {
     };
 
     doSubmit = async () => {
-        console.log('prin '+ this.state.data );
         const obj = this.state.data;
         const { data } = await axios.post('http://pagesmanagement.azurewebsites.net/api/ResponsivePages/', obj);
-        console.log(data);
         
         //Redirect to pages 
         this.props.history.push('/pages');
@@ -24,7 +22,12 @@ class NewPage extends PageForm {
         //const { data, errors } = this.state;
         return ( 
             <div>
-                <h4><FaPlusCircle /> New Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
+                <div className="row">
+                    <div className="col-12">
+                        <h4><FaPlusCircle /> New Page {this.state.data.title && <span> - {this.state.data.title}</span>}</h4>
+                        <hr />
+                    </div>
+                </div>
                 <form>
                     {this.renderPageForm()}
                 </form>

@@ -10,7 +10,7 @@ class Pages extends Component {
       state = {
           pages: [],
           currentPage: 1,
-          pageSize: 4,
+          pageSize: 5,
           filteredPages: []
       };
     
@@ -20,7 +20,6 @@ class Pages extends Component {
         const { data: pages } = await axios.get('http://pagesmanagement.azurewebsites.net/api/ResponsivePages')
         
         this.setState({ pages, filteredPages: pages });
-        console.log(pages);
       }
 
       getPageType(pageType) {
@@ -70,35 +69,40 @@ class Pages extends Component {
                 </form>
               </div>
             </div>
-            <table className="table pagesTable">
-              <thead className="">
-                  <tr>
-                      <th scope="col">#id</th>
-                      <th scope="col">Title</th>
-                      <th scope="col">Description</th>  
-                      <th scope="col">Type</th>
-                      <th scope="col">Active</th>
-                      <th scope="col">Published on</th>
-                      <th scope="col"></th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {pages.map(page => (
-                  <tr key={page.id}>
-                      <th scope="row">{page.id}</th>
-                      <td>{page.title}</td>
-                      <td>{page.description}</td>
-                      <td>{this.getPageType(page.type)}</td>
-                      <td>{page.isActive? "Yes" : "No"}</td>
-                      <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
-                      <td>
-                        <button className="btn btn-light btn-outline-primary"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> 
-                        {/* <button type="button" className="btn btn-danger"><Link to={`/deletepage/${page.id}`}><FaTrashAlt /> Delete Page</Link></button> */}
-                      </td>
-                  </tr>
-                  ))}
-              </tbody>
-            </table>
+            <div className="row">
+              <div className="col-12">
+                <table className="table pagesTable">
+                  <thead>
+                      <tr>
+                          <th scope="col">#id</th>
+                          <th scope="col">Title</th>
+                          <th scope="col">Description</th>  
+                          <th scope="col">Type</th>
+                          <th scope="col">Active</th>
+                          <th scope="col">Published on</th>
+                          <th scope="col"></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <span>{filteredPages.length === 0 ? "There are no pages to display." : "" }</span>
+                      {pages.map(page => (
+                      <tr key={page.id}>
+                          <th scope="row">{page.id}</th>
+                          <td>{page.title}</td>
+                          <td>{page.description}</td>
+                          <td>{this.getPageType(page.type)}</td>
+                          <td>{page.isActive? "Yes" : "No"}</td>
+                          <td>{new Date(page.publishedOn).toLocaleDateString()}</td>
+                          <td>
+                            <button className="btn btn-light btn-outline-primary"><Link to={`/editpage/${page.id}`}><FaEdit /> Edit</Link></button> 
+                            {/* <button type="button" className="btn btn-danger"><Link to={`/deletepage/${page.id}`}><FaTrashAlt /> Delete Page</Link></button> */}
+                          </td>
+                      </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
             <Pagination 
               itemsCount={this.state.filteredPages.length} 
               pageSize={pageSize} 

@@ -21,12 +21,13 @@
     background-color: white;
 }
 
-
 .content button {
     margin-right: 10px;
     margin-bottom: 15px;
     box-shadow: 1px 1px 1px 1px lightgrey;
 }
+
+/* Button for New Page */
 .createPageBtn a {
     text-decoration: none;
     color: white;
@@ -37,6 +38,13 @@
     float: right;
 }
 
+/* Pages Table */
+.pagesTable {
+    margin-top: 10px;
+}
+.pagesTable thead {
+    background-color: #f7f7f7b0;
+}
 .pagesTable td {
     max-width: 250px;
 }
@@ -52,6 +60,10 @@
 
 .content .deleteBtn {
     float: right;
+}
+
+.formActionButtons {
+    margin-top: 30px;
 }
 
 
