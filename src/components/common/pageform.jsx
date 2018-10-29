@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Joi from 'joi-browser';
-import { FaEdit, FaUndo, FaPaperPlane, FaFolderPlus, FaRegCalendarAlt } from 'react-icons/fa';
+import { FaRegBookmark, FaList, FaUndo, FaPaperPlane, FaFolderPlus, FaRegCalendarAlt } from 'react-icons/fa';
 
 class PageForm extends Component {
     state = { 
@@ -123,7 +123,7 @@ class PageForm extends Component {
                     <label htmlFor="title">Page Title *</label>
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text"><FaFolderPlus /></span>
+                            <span className="input-group-text"><FaRegBookmark /></span>
                         </div>
                         <input 
                             type="text" 
@@ -140,7 +140,7 @@ class PageForm extends Component {
                     <label htmlFor="description">Page Description *</label>
                     <div className="input-group">
                         <div className="input-group-prepend">
-                            <span className="input-group-text"><FaEdit /></span>
+                            <span className="input-group-text"><FaList /></span>
                         </div>
                         <textarea 
                             type="text"
@@ -192,7 +192,7 @@ class PageForm extends Component {
                 <div className="form-group d-none">
                     <label htmlFor="publishedOn">Date of publish: </label>
                     <div className="input-group">
-                        <span className="input-group-addon"><FaEdit /></span>
+                        <span className="input-group-addon"></span>
                         <input 
                             type="text"
                             value={this.state.data.publishedOn}
